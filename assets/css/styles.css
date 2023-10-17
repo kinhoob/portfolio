@@ -386,20 +386,33 @@ body.dark-theme {
   display: grid;
 }
 
+/* Alinhamento dos Skills*/
+.alinhaskill{
+  direction: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
+  
+}
+
+
+
 .skills__info {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3);
   gap: 2.5rem 2rem;
 }
 
 .skills__data {
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .skills__blob {
   width: 80px;
   height: 100px;
-  background-color: var(--container-color);
   border-radius: 3rem;
   place-items: center;
   margin: 1rem;
