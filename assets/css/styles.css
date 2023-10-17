@@ -369,7 +369,7 @@ body.dark-theme {
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 5rem;
+  column-gap: .5rem;
   font-size: var(--small-font-size);
   font-weight: var(--font-semi-bold);
   margin-bottom: 2.5rem;
@@ -406,7 +406,7 @@ body.dark-theme {
 }
 
 .skills__blob img {
-  width: 60px;
+  width: 40px;
 }
 
 .skills__name {
