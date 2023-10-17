@@ -17,8 +17,8 @@
   /* Change the first number */
   /* Blue: 207 - Purple: 250 - Pink: 356 - Teal: 174 */
   --gradient-color: linear-gradient(180deg,
-                      hsla(207, 48%, 72%, 0),
-                      hsla(207, 65%, 65%, 1));
+      hsla(207, 48%, 72%, 0),
+      hsla(207, 65%, 65%, 1));
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
@@ -73,10 +73,13 @@ body {
   font-size: var(--normal-font-size);
   background-color: var(--body-color);
   color: var(--text-color);
-  transition: background .4s; /* for dark mode animation */
+  transition: background .4s;
+  /* for dark mode animation */
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--title-color);
   font-family: var(--title-font);
   font-weight: var(--font-medium);
@@ -132,7 +135,7 @@ body.dark-theme {
   padding-bottom: 3.5rem;
 }
 
-.section__title, 
+.section__title,
 .section__subtitle {
   text-align: center;
 }
@@ -151,7 +154,8 @@ body.dark-theme {
 }
 
 .main {
-  overflow: hidden; /* For animation */
+  overflow: hidden;
+  /* For animation */
 }
 
 /*=============== HEADER & NAV ===============*/
@@ -192,7 +196,7 @@ body.dark-theme {
 }
 
 @media screen and (max-width: 1023px) {
-  .nav__menu{
+  .nav__menu {
     position: fixed;
     width: 88%;
     left: 0;
@@ -223,7 +227,7 @@ body.dark-theme {
   transition: color .3s;
 }
 
-.nav__link:hover{
+.nav__link:hover {
   color: var(--title-color);
 }
 
@@ -288,7 +292,7 @@ body.dark-theme {
   align-items: flex-end;
 }
 
-.home__perfil img{
+.home__perfil img {
   width: 150px;
 }
 
@@ -417,30 +421,86 @@ body.dark-theme {
 
 /* Animation skills */
 
-.skills__blob:hover img{
+.skills__blob:hover img {
   animation: bounce-skills .6s;
 }
 
-@keyframes bounce-skills{
-  0%{
+@keyframes bounce-skills {
+  0% {
     transform: translate(0);
   }
-  20%{
+
+  20% {
     transform: translateY(-6px);
   }
-  40%{
+
+  40% {
     transform: translate(0);
   }
-  60%{
+
+  60% {
     transform: translateY(-3px);
   }
-  80%{
+
+  80% {
     transform: translate(0);
   }
 }
 
 /*=============== QUALIFICATION ===============*/
 
+.qualification {
+  position: relative;
+}
+
+.qualificatio__container {
+  row-gap: 3.5rem;
+}
+
+.qualificatio__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: .5rem;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+  margin-bottom: 2rem;
+}
+
+.qualificatio__title i {
+  font-size: 1rem;
+  font-weight: initial;
+}
+
+.qualification__info {
+  display: grid;
+  row-gap: 2rem;
+}
+
+.qualification__name {
+  font-size: var(--normal-font-size);
+  margin-bottom: 1.25rem;
+}
+
+.qualification__country,
+.qualification__year {
+  display: block;
+  font-size: var(--small-font-size);
+  color: var(--text-color-light);
+}
+
+.qualification__country {
+  margin-bottom: .75rem;
+}
+
+.qualification__img {
+  width: 150px;
+  position: absolute;
+  right: -3rem;
+  bottom: 12rem;
+  transform: rotate(15deg);
+  opacity: .1;
+}
 
 /*=============== SERVICES ===============*/
 
