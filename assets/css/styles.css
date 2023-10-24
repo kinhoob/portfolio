@@ -529,8 +529,8 @@ body.dark-theme {
   justify-content: center;
 }
 
-.projects_img {
-  width: 250px;
+.projects__img {
+  width: 400px;
   border-radius: .75rem;
   margin-bottom: 1.25rem;
 }
