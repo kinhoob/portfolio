@@ -38,7 +38,7 @@ let swiperProjects = new Swiper(".projects__container", {
     spaceBetween: 24,
     navigation: {
         nextEl: ".swiper-button-next",
-        prevEl: "swiper-button-prev",
+        prevEl: ".swiper-button-prev",
     },
     pagination: {
         el: ".swiper-pagination",
