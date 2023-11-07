@@ -33,6 +33,7 @@ navLink.forEach(n => n.addEventListener('click', linkAction))
 
 /*=============== SWIPER PROJECTS ===============*/
 
+
 let swiperProjects = new Swiper(".projects__container", {
     loop: true,
     spaceBetween: 24,
@@ -50,6 +51,7 @@ let swiperProjects = new Swiper(".projects__container", {
         },
     },
 });
+
 
 /*=============== SWIPER TESTIMONIAL ===============*/
 
