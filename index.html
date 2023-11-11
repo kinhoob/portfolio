@@ -400,7 +400,59 @@
 
         <!--==================== CONTACT ====================-->
         <section class="contact section" id="contact">
+            <h2 class="section__title">Entre em Contato</h2>
+            <span class="section__subtitle"></span>
 
+            <div class="contact__container container grid section__border">
+                <div class="contact__content">
+                    <h3 class="contact__title">
+                        <i class="ri-chat-3-line"></i> Fale Comigo
+                    </h3>
+
+                    <div class="contact__info">
+                        <div class="contact__data">
+                            <span class="contact__data-tile">E-mail</span>
+                            <span class="contact__data-info">marcodavibdemelo@gmail.com</span>
+                        </div>
+
+                        <div class="contact__data">
+                            <span class="contact__data-tile">Whatsapp</span>
+                            <span class="contact__data-info">(81) 98365-6583</span>
+                            <a href="https://api.whatssapp.com/send?phone=5581983656583&text=Olá, Marco Davi." class="contact__button">
+                                Mande sua mensagem <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div> 
+                    </div>
+                </div>
+                <div class="contact__content">
+                    <h3 class="contact__title">
+                        <i class="ri-send-plane-line"></i> Conte-me sobre seu projeto
+                    </h3>
+
+                    <form action="" class="contact__form" id="contact__form">
+                        <div class="contact__form-div">
+                            <label for="" class="contact__form-tag">Nome</label>
+                            <input type="text" name="user_name" required placeholder="Escreva seu nome" class="contact__form-input" id="contact-name">
+                        </div>
+
+                        <div class="contact__form-div">
+                            <label for="" class="contact__form-tag">E-mail</label>
+                            <input type="email" name="user_mail" required placeholder="Escreva seu e-mail" class="contact__form-input" id="contact-email">
+                        </div>
+
+                        <div class="contact__form-div  contact__form-area">
+                            <label for="" class="contact__form-tag">Projeto</label>
+                            <textarea name="user_project" id="contact-project" placeholder="Escreva seu projeto" class="contact__form-input"></textarea>
+                        </div>
+
+                        <p class="contact__message" id="contact-message"></p>
+
+                        <button type="submit" class="contact__button">
+                            Enviar <i class="ri-arrow-right-up-line"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -421,7 +473,7 @@
     <script src="assets/js/swiper-bundle.min.js"></script>
 
     <!--=============== EMAIL JS ===============-->
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js"></script>  
