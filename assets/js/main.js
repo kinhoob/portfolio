@@ -30,25 +30,25 @@ navLink.forEach(n => n.addEventListener('click', linkAction))
 
 /*=============== SWIPER PROJECTS ===============*/
 
-
-let swiperProjects = new Swiper(".projects__container", {
-    loop: true,
-    spaceBetween: 24,
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    pagination: {
-        el: ".swiper-pagination",
-    },
-    breakpoints: {
-        1200: {
-            slidesPerView: 2,
-            spaceBetween: -56,
+document.addEventListener('DOMContentLoaded', function () {
+    let swiperProjects = new Swiper(".projects__container", {
+        loop: true,
+        spaceBetween: 24,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
         },
-    },
+        pagination: {
+            el: ".swiper-pagination",
+        },
+        breakpoints: {
+            1200: {
+                slidesPerView: 2,
+                spaceBetween: -56,
+            },
+        },
+    });
 });
-
 
 /*=============== SWIPER TESTIMONIAL ===============*/
 
@@ -90,6 +90,7 @@ const sendEmail = (e) => {
 
 contactForm.addEventListener('submit', sendEmail);
 
+
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 
 const sections = document.querySelectorAll('section[id]');
@@ -126,38 +127,57 @@ window.addEventListener('scroll', handleScroll);
 
 
 /*=============== DARK LIGHT THEME ===============*/
+const themeButton = document.getElementById('theme-button');
+const darkTheme = 'dark-theme';
+const iconTheme = 'ri-sun-line';
 
-const themeButton = document.getElementById('theme-button')
-const darkTheme = 'dark-theme'
-const iconTheme = 'ri-sun-line'
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line';
 
+const applyTheme = () => {
+    document.body.classList.toggle(darkTheme);
+    themeButton.classList.toggle(iconTheme);
+    localStorage.setItem('selected-theme', getCurrentTheme());
+    localStorage.setItem('selected-icon', getCurrentIcon());
+};
 
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
+themeButton.addEventListener('click', applyTheme);
 
+// Carregar tema salvo
+document.addEventListener('DOMContentLoaded', function () {
+    const selectedTheme = localStorage.getItem('selected-theme');
+    const selectedIcon = localStorage.getItem('selected-icon');
 
-const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
-
-
-if (selectedTheme) {
-    document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-    themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme)
-}
-
-// Ativar ou desativar a função de troca de tema
-themeButton.addEventListener('click', () => {
-    // Adicionar ou remover o tema
-    document.body.classList.toggle(darkTheme)
-    themeButton.classList.toggle(iconTheme)
-    
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
-})
-
+    if (selectedTheme) {
+        document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
+        themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme);
+    }
+});
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 
+const scrollHeader = () =>{
+    const header = document.getElementById('header')
+    // When the scroll is greater than 50 viewport height, add the scroll-header class to the header tag
+    this.scrollY >= 50 ? header.classList.add('bg-header') 
+                       : header.classList.remove('bg-header')
+}
+window.addEventListener('scroll', scrollHeader)
+
+
+
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
+const sr = ScrollReveal({
+    origin: 'top',
+    distance: '60px',
+    duration: '2500',
+    delay: 400,
+    reset: true
+});
 
+sr.reveal(`.home__data, .projects__container, .footer__container`);
+sr.reveal(`.home__info div`, { delay: 600, origin: 'bottom', interval: 100 });
+sr.reveal(`.skills__container:nth-child(1), .contact__container:nth-child(1)`, { origin: 'left' });
+sr.reveal(`.skills__container:nth-child(2), .contact__container:nth-child(2)`, { origin: 'right' });
+sr.reveal(`.qualification__content`, { interval: 100 });

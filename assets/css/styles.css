@@ -17,8 +17,8 @@
   /* Change the first number */
   /* Blue: 207 - Purple: 250 - Pink: 356 - Teal: 174 */
   --gradient-color: linear-gradient(180deg,
-      hsla(207, 48%, 72%, 0),
-      hsla(207, 65%, 65%, 1));
+      hsla(356, 48%, 72%, 0),
+      hsla(356, 65%, 65%, 1));
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
@@ -334,7 +334,7 @@ body.dark-theme {
 .home__perfil {
   width: 170px;
   height: 260px;
-  background-color: var(--first-color);
+  background-color: var(--gradient-color);
   border-radius: 5.5rem;
   overflow: hidden;
   display: flex;
@@ -516,11 +516,11 @@ body.dark-theme {
   position: relative;
 }
 
-.qualificatio__container {
+.qualification__container {
   row-gap: 3.5rem;
 }
 
-.qualificatio__title {
+.qualification__title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -530,7 +530,7 @@ body.dark-theme {
   margin-bottom: 2rem;
 }
 
-.qualificatio__title i {
+.qualification__title i {
   font-size: 1rem;
   font-weight: initial;
 }
@@ -903,9 +903,288 @@ body.dark-theme {
 
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
+@media screen and (max-width: 340px) {
+  .container {
+    margin-inline: 1rem;
+  }
 
+  .nav-menu {
+    padding-bottom: 4rem;
+  }
+
+  .nav__list {
+    gap: 1rem 1.25rem;
+  }
+
+  .skills__info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects__img {
+    width: 200px;
+    justify-self: center;
+  }
+}
 
 /* For medium devices */
 
+@media screen and (min-width: 576px) {
+
+  .nav,
+  .nav__menu {
+    width: 380px;
+  }
+
+  .nav {
+    margin: 0 auto;
+  }
+
+  .skills__container {
+    justify-content: center;
+  }
+
+  .projects__container {
+    width: 400px;
+  }
+
+  .projects__container {
+    overflow: hidden;
+  }
+
+  .projects__container .swiper-button-prev {
+    left: 1rem;
+  }
+
+  .projects__container .swiper-button-next {
+    right: 1rem;
+  }
+}
 
 /* For large devices */
+
+@media screen and (min-width: 767px) {
+  .home__container {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem; /* Adicionei espaçamento entre as colunas para melhor distribuição */
+  }
+
+  .home__data {
+    order: 2;
+  }
+
+  .home__info:nth-child(3) {
+    order: 3;
+    text-align: right;
+  }
+
+  .home__info {
+    margin-top: 5rem; /* Ajustei o valor para melhor distribuição */
+  }
+
+  .home__info-description {
+    padding-right: 0;
+  }
+
+  .skills__container,
+  .qualification__container,
+  .contact__container {
+    grid-template-columns: 1fr 1fr; /* Alterei para duas colunas igualmente distribuídas */
+    gap: 2rem; /* Adicionei espaçamento entre as colunas para melhor distribuição */
+  }
+
+  .skills__container {
+    column-gap: 2rem; /* Reduzi o valor para melhor distribuição */
+  }
+
+  .qualification__container {
+    justify-content: center;
+  }
+
+  .projects__container {
+    width: 100%; /* Alterei para ocupar a largura total do container pai */
+    max-width: 600px; /* Adicionei uma largura máxima para manter a responsividade */
+  }
+
+  .contact__form {
+    width: 100%; /* Alterei para ocupar a largura total do container pai */
+    max-width: 400px; /* Adicionei uma largura máxima para manter a responsividade */
+  }
+
+  .contact__container {
+    justify-content: center;
+    gap: 4rem; /* Adicionei espaçamento vertical entre os elementos */
+  }
+}
+
+
+@media screen and (min-width: 1023px) {
+  .header {
+    top: 0;
+    bottom: initial;
+    background-color: var(--body-color);
+    transition: .4s;
+  }
+
+  .nav {
+    width: initial;
+    height: calc(var(--header-height) + 1.5rem);
+    box-shadow: none;
+    border-radius: 0;
+    column-gap: 3rem;
+    margin-inline: 1.5rem;
+    padding: 0;
+  }
+
+  .nav__link i,
+  .nav__toggle,
+  .nav__close {
+    display: none;
+  }
+
+  .nav__menu {
+    width: initial;
+    margin-left: auto;
+    background-color: var(--body-color);
+    transition: background .4s;
+  }
+
+  .nav__list {
+    display: flex;
+    column-gap: 3rem;
+  }
+
+  .nav__link {
+    font-size: var(--normal-font-size);
+  }
+
+  .dark-theme .nav,
+  .dark-theme .nav-menu {
+    background-color: var(--body-color);
+    box-shadow: none;
+  }
+
+  .change-theme {
+    color: var(--text-color-light);
+  }
+
+  .change-theme:hover {
+    color: var(--title-color);
+  }
+
+  .section {
+    padding-block: 8rem 0;
+  }
+
+  .home__title {
+    font-size: 2.25rem;
+  }
+
+  .scrollup {
+    right: 3rem;
+  }
+
+  .show-scroll {
+    bottom: 5rem;
+  }
+
+  .bg-header {
+    box-shadow: 0 4px 20px hsla(207, 24%, 35%, .1);
+  }
+
+  .dark-theme .bg-header {
+    box-shadow: 0 6px 24px hsla(207, 24%, 8%, 0.6);
+  }
+}
+
+@media screen and (min-width: 1048px) {
+  .container {
+    margin-inline: auto;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .section__border {
+    padding-bottom: 6rem;
+  }
+
+  .section__subtitle {
+    margin-bottom: 3rem; /* Reduzi o valor para melhor distribuição */
+  }
+
+  .home__title {
+    font-size: var(--biggest-font-size);
+  }
+
+  .home__blob {
+    width: 400px;
+    height: 580px;
+    border-radius: 12.5rem;
+  }
+
+  .home__perfil {
+    width: 340px;
+    height: 520px;
+    border-radius: 10.6rem;
+  }
+
+  .home__perfil img {
+    width: 100%; /* Adicionei esta propriedade para garantir que a imagem seja responsiva */
+  }
+
+  .home__shape-wawes {
+    width: 100px;
+    left: -4rem;
+    top: 5rem; /* Ajustei o valor para melhor distribuição */
+  }
+
+  .home__shape-circle {
+    width: 250px;
+    bottom: -1rem;
+    right: 5rem;
+  }
+
+  .home__data {
+    row-gap: 2.5rem;
+  }
+
+  .home__social {
+    column-gap: 1.5rem; /* Reduzi o valor para melhor distribuição */
+  }
+
+  .home__social-link {
+    font-size: 1.5rem;
+  }
+
+  .home__info {
+    grid-template-rows: repeat(2, auto); /* Ajustei a altura das linhas para ser automática */
+    row-gap: 2rem; /* Ajustei o valor para melhor distribuição */
+    margin-top: 8rem; /* Ajustei o valor para melhor distribuição */
+  }
+
+  .skills__container {
+    column-gap: 6rem; /* Reduzi o valor para melhor distribuição */
+  }
+
+  /* Restante do seu código... */
+
+  .footer__container {
+    padding: 4rem 0 2rem; /* Ajustei o valor para melhor distribuição */
+  }
+
+  .footer__list {
+    column-gap: 1.5rem; /* Reduzi o valor para melhor distribuição */
+    margin: 2rem 0; /* Ajustei o valor para melhor distribuição */
+  }
+
+  .footer__social {
+    column-gap: 1.5rem; /* Reduzi o valor para melhor distribuição */
+  }
+
+  .footer__social-link {
+    font-size: 1.5rem;
+  }
+
+  .footer__copu {
+    margin-top: 3rem; /* Ajustei o valor para melhor distribuição */
+  }
+}
