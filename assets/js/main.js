@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /*=============== EMAIL JS ===============*/
-const contactForm = document.getElementById('contact-form'),
+const contactForm = document.getElementById('contact__form'),
     contactName = document.getElementById('contact-name'),
     contactEmail = document.getElementById('contact-email'),
     contactProject = document.getElementById('contact-project'),
@@ -68,7 +68,7 @@ const sendEmail = (e) => {
         contactMessage.classList.add('color-red');
         contactMessage.textContent = 'Escreva em todos os campos';
     } else {
-        emailjs.sendForm('service_v8p4w6l', 'template_1c69no7', 'contact-form', 'laoQ4ko84LKm4dx1d')
+        emailjs.sendForm('service_v8p4w6l', 'template_1c69no7', '#contact__form', 'laoQ4ko84LKm4dx1d')
             .then(() => {
                 contactMessage.classList.remove('color-red');
                 contactMessage.classList.add('color-blue');
@@ -127,27 +127,29 @@ window.addEventListener('scroll', handleScroll);
 
 
 /*=============== DARK LIGHT THEME ===============*/
-const themeButton = document.getElementById('theme-button')
-const darkTheme = 'dark-theme'
-const iconTheme = 'ri-sun-line'
+const themeButton = document.getElementById('theme-button');
+const darkTheme = 'dark-theme';
+const iconTheme = 'ri-sun-line';
 
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
+const selectedTheme = localStorage.getItem('selected-theme');
+const selectedIcon = localStorage.getItem('selected-icon');
 
-const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line';
 
 if (selectedTheme) {
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme)
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme);
 }
 
 themeButton.addEventListener('click', () => {
-    document.body.classList.toggle(darkTheme)
-    themeButton.classList.toggle(iconTheme)
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
-})
+  document.body.classList.toggle(darkTheme);
+  themeButton.classList.toggle(iconTheme);
+  localStorage.setItem('selected-theme', getCurrentTheme());
+  localStorage.setItem('selected-icon', getCurrentIcon());
+});
+
+  
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 

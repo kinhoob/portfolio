@@ -334,7 +334,7 @@ body.dark-theme {
 .home__perfil {
   width: 170px;
   height: 260px;
-  background-color: var(--gradient-color);
+  background-color: rgb(138, 179, 226);
   border-radius: 5.5rem;
   overflow: hidden;
   display: flex;
@@ -878,7 +878,7 @@ body.dark-theme {
 .scrollup {
   position: fixed;
   right: 1rem;
-  bottom: 7.5rem;
+  bottom: -30%;
   background-color: var(--body-color);
   box-shadow: 0 4px 12px hsl(207, 24%, 35% .15);
   display: inline-flex;
@@ -964,8 +964,8 @@ body.dark-theme {
 
 @media screen and (min-width: 767px) {
   .home__container {
+    display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    gap: 2rem; /* Adicionei espaçamento entre as colunas para melhor distribuição */
   }
 
   .home__data {
@@ -985,11 +985,14 @@ body.dark-theme {
     padding-right: 0;
   }
 
-  .skills__container,
+  .skills__container {
+    grid-template-columns: 1fr; /* Alterei para duas colunas igualmente distribuídas */
+    gap: 2rem; /* Adicionei espaçamento entre as colunas para melhor distribuição */
+  }
   .qualification__container,
   .contact__container {
-    grid-template-columns: 1fr 1fr; /* Alterei para duas colunas igualmente distribuídas */
-    gap: 2rem; /* Adicionei espaçamento entre as colunas para melhor distribuição */
+    grid-template-columns: 1fr 1fr ; /* Alterei para duas colunas igualmente distribuídas */
+    gap: 5rem; /* Adicionei espaçamento entre as colunas para melhor distribuição */
   }
 
   .skills__container {
@@ -1002,7 +1005,7 @@ body.dark-theme {
 
   .projects__container {
     width: 100%; /* Alterei para ocupar a largura total do container pai */
-    max-width: 600px; /* Adicionei uma largura máxima para manter a responsividade */
+    max-width: 400px; /* Adicionei uma largura máxima para manter a responsividade */
   }
 
   .contact__form {
