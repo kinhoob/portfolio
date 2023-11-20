@@ -1005,7 +1005,7 @@ body.dark-theme {
 
   .projects__container {
     width: 100%; /* Alterei para ocupar a largura total do container pai */
-    max-width: 400px; /* Adicionei uma largura máxima para manter a responsividade */
+    max-width: 600px; /* Adicionei uma largura máxima para manter a responsividade */
   }
 
   .contact__form {
