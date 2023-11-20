@@ -253,7 +253,7 @@ body.dark-theme {
     box-shadow: 0 4px 20px hsla(207, 24%, 35%, .1);
     padding: 2rem 1.5rem 5rem;
     border-radius: 2rem;
-    transition: bottom .3s;
+    transition: bottom .2s;
   }
 }
 
@@ -270,7 +270,7 @@ body.dark-theme {
   row-gap: .25rem;
   font-size: var(--smaller-font-size);
   color: var(--text-color-light);
-  transition: color .3s;
+  transition: color .2s;
 }
 
 .nav__link:hover {
@@ -375,7 +375,7 @@ body.dark-theme {
 .home__social-link {
   font-size: 1.25rem;
   color: var(--text-color-light);
-  transition: color .3s;
+  transition: color .2s;
 }
 
 .home__social-link:hover {
@@ -605,7 +605,7 @@ body.dark-theme {
 
 .projects__button i {
   font-size: 1rem;
-  transition: transform .3s;
+  transition: transform .2s;
 }
 
 .projects__button:hover i {
@@ -1025,7 +1025,7 @@ body.dark-theme {
     top: 0;
     bottom: initial;
     background-color: var(--body-color);
-    transition: .4s;
+    transition: .3s;
   }
 
   .nav {
@@ -1048,7 +1048,7 @@ body.dark-theme {
     width: initial;
     margin-left: auto;
     background-color: var(--body-color);
-    transition: background .4s;
+    transition: background .3s;
   }
 
   .nav__list {
@@ -1187,7 +1187,7 @@ body.dark-theme {
     font-size: 1.5rem;
   }
 
-  .footer__copu {
+  .footer__copy {
     margin-top: 3rem; /* Ajustei o valor para melhor distribuição */
   }
 }
