@@ -50,8 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-/*=============== SWIPER TESTIMONIAL ===============*/
-
 
 /*=============== EMAIL JS ===============*/
 const contactForm = document.getElementById('contact__form'),
