@@ -19,9 +19,7 @@ if (navClose) {
 
 
 /*=============== REMOVE MENU MOBILE ===============*/
-
 const navLink = document.querySelectorAll('.nav__link')
-
 const linkAction = () => {
     const navMenu = document.getElementById('nav-menu')
     navMenu.classList.remove('show-menu')
@@ -29,7 +27,6 @@ const linkAction = () => {
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
 /*=============== SWIPER PROJECTS ===============*/
-
 document.addEventListener('DOMContentLoaded', function () {
     let swiperProjects = new Swiper(".projects__container", {
         loop: true,
