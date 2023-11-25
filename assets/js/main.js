@@ -17,7 +17,6 @@ if (navClose) {
     })
 }
 
-
 /*=============== REMOVE MENU MOBILE ===============*/
 const navLink = document.querySelectorAll('.nav__link')
 const linkAction = () => {
@@ -133,25 +132,25 @@ const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dar
 const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line';
 
 if (selectedTheme) {
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
-  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme);
+    document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
+    themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme);
 }
 themeButton.addEventListener('click', () => {
-  document.body.classList.toggle(darkTheme);
-  themeButton.classList.toggle(iconTheme);
-  localStorage.setItem('selected-theme', getCurrentTheme());
-  localStorage.setItem('selected-icon', getCurrentIcon());
+    document.body.classList.toggle(darkTheme);
+    themeButton.classList.toggle(iconTheme);
+    localStorage.setItem('selected-theme', getCurrentTheme());
+    localStorage.setItem('selected-icon', getCurrentIcon());
 });
 
-  
+
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 
-const scrollHeader = () =>{
+const scrollHeader = () => {
     const header = document.getElementById('header')
     // When the scroll is greater than 50 viewport height, add the scroll-header class to the header tag
-    this.scrollY >= 50 ? header.classList.add('bg-header') 
-                       : header.classList.remove('bg-header')
+    this.scrollY >= 50 ? header.classList.add('bg-header')
+        : header.classList.remove('bg-header')
 }
 window.addEventListener('scroll', scrollHeader)
 
@@ -164,7 +163,6 @@ const sr = ScrollReveal({
     delay: 400,
     reset: true
 });
-
 sr.reveal(`.home__data, .projects__container, .footer__container`);
 sr.reveal(`.home__info div`, { delay: 600, origin: 'bottom', interval: 100 });
 sr.reveal(`.skills__container:nth-child(1), .contact__container:nth-child(1)`, { origin: 'left' });
