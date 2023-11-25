@@ -894,9 +894,7 @@ body.dark-theme {
   transform: translateY(-.25rem);
 }
 
-
 /* Show Scroll Up*/
-
 .show-scroll {
   bottom: 7.5rem;
 }
@@ -978,7 +976,8 @@ body.dark-theme {
   }
 
   .home__info {
-    margin-top: 5rem; /* Ajustei o valor para melhor distribuição */
+    margin-top: 5rem;
+    /* Ajustei o valor para melhor distribuição */
   }
 
   .home__info-description {
@@ -986,17 +985,23 @@ body.dark-theme {
   }
 
   .skills__container {
-    grid-template-columns: 1fr; /* Alterei para duas colunas igualmente distribuídas */
-    gap: 2rem; /* Adicionei espaçamento entre as colunas para melhor distribuição */
+    grid-template-columns: 1fr;
+    /* Alterei para duas colunas igualmente distribuídas */
+    gap: 2rem;
+    /* Adicionei espaçamento entre as colunas para melhor distribuição */
   }
+
   .qualification__container,
   .contact__container {
-    grid-template-columns: 1fr 1fr ; /* Alterei para duas colunas igualmente distribuídas */
-    gap: 5rem; /* Adicionei espaçamento entre as colunas para melhor distribuição */
+    grid-template-columns: 1fr 1fr;
+    /* Alterei para duas colunas igualmente distribuídas */
+    gap: 5rem;
+    /* Adicionei espaçamento entre as colunas para melhor distribuição */
   }
 
   .skills__container {
-    column-gap: 2rem; /* Reduzi o valor para melhor distribuição */
+    column-gap: 2rem;
+    /* Reduzi o valor para melhor distribuição */
   }
 
   .qualification__container {
@@ -1004,18 +1009,23 @@ body.dark-theme {
   }
 
   .projects__container {
-    width: 100%; /* Alterei para ocupar a largura total do container pai */
-    max-width: 600px; /* Adicionei uma largura máxima para manter a responsividade */
+    width: 100%;
+    /* Alterei para ocupar a largura total do container pai */
+    max-width: 600px;
+    /* Adicionei uma largura máxima para manter a responsividade */
   }
 
   .contact__form {
-    width: 100%; /* Alterei para ocupar a largura total do container pai */
-    max-width: 400px; /* Adicionei uma largura máxima para manter a responsividade */
+    width: 100%;
+    /* Alterei para ocupar a largura total do container pai */
+    max-width: 400px;
+    /* Adicionei uma largura máxima para manter a responsividade */
   }
 
   .contact__container {
     justify-content: center;
-    gap: 4rem; /* Adicionei espaçamento vertical entre os elementos */
+    gap: 4rem;
+    /* Adicionei espaçamento vertical entre os elementos */
   }
 }
 
@@ -1111,7 +1121,8 @@ body.dark-theme {
   }
 
   .section__subtitle {
-    margin-bottom: 3rem; /* Reduzi o valor para melhor distribuição */
+    margin-bottom: 3rem;
+    /* Reduzi o valor para melhor distribuição */
   }
 
   .home__title {
@@ -1131,13 +1142,15 @@ body.dark-theme {
   }
 
   .home__perfil img {
-    width: 100%; /* Adicionei esta propriedade para garantir que a imagem seja responsiva */
+    width: 100%;
+    /* Adicionei esta propriedade para garantir que a imagem seja responsiva */
   }
 
   .home__shape-wawes {
     width: 100px;
     left: -4rem;
-    top: 5rem; /* Ajustei o valor para melhor distribuição */
+    top: 5rem;
+    /* Ajustei o valor para melhor distribuição */
   }
 
   .home__shape-circle {
@@ -1151,7 +1164,8 @@ body.dark-theme {
   }
 
   .home__social {
-    column-gap: 1.5rem; /* Reduzi o valor para melhor distribuição */
+    column-gap: 1.5rem;
+    /* Reduzi o valor para melhor distribuição */
   }
 
   .home__social-link {
@@ -1159,28 +1173,36 @@ body.dark-theme {
   }
 
   .home__info {
-    grid-template-rows: repeat(2, auto); /* Ajustei a altura das linhas para ser automática */
-    row-gap: 2rem; /* Ajustei o valor para melhor distribuição */
-    margin-top: 8rem; /* Ajustei o valor para melhor distribuição */
+    grid-template-rows: repeat(2, auto);
+    /* Ajustei a altura das linhas para ser automática */
+    row-gap: 2rem;
+    /* Ajustei o valor para melhor distribuição */
+    margin-top: 8rem;
+    /* Ajustei o valor para melhor distribuição */
   }
 
   .skills__container {
-    column-gap: 6rem; /* Reduzi o valor para melhor distribuição */
+    column-gap: 6rem;
+    /* Reduzi o valor para melhor distribuição */
   }
 
   /* Restante do seu código... */
 
   .footer__container {
-    padding: 4rem 0 2rem; /* Ajustei o valor para melhor distribuição */
+    padding: 4rem 0 2rem;
+    /* Ajustei o valor para melhor distribuição */
   }
 
   .footer__list {
-    column-gap: 1.5rem; /* Reduzi o valor para melhor distribuição */
-    margin: 2rem 0; /* Ajustei o valor para melhor distribuição */
+    column-gap: 1.5rem;
+    /* Reduzi o valor para melhor distribuição */
+    margin: 2rem 0;
+    /* Ajustei o valor para melhor distribuição */
   }
 
   .footer__social {
-    column-gap: 1.5rem; /* Reduzi o valor para melhor distribuição */
+    column-gap: 1.5rem;
+    /* Reduzi o valor para melhor distribuição */
   }
 
   .footer__social-link {
@@ -1188,6 +1210,7 @@ body.dark-theme {
   }
 
   .footer__copy {
-    margin-top: 3rem; /* Ajustei o valor para melhor distribuição */
+    margin-top: 3rem;
+    /* Ajustei o valor para melhor distribuição */
   }
 }
