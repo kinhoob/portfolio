@@ -289,7 +289,7 @@ body.dark-theme {
   cursor: pointer;
 }
 
-/* Show menu */
+/* mostrar menu */
 
 .show-menu {
   bottom: 2rem;
@@ -302,7 +302,7 @@ body.dark-theme {
 }
 
 
-/*=============== HOME ===============*/
+/*=============== PÁGINA INICIAL ===============*/
 
 .home__container {
   row-gap: 4rem;
