@@ -655,13 +655,9 @@ body.dark-theme {
   background-color: var(--title-color);
 }
 
-/*=============== TESTIMONIAL ===============*/
 
 
-/* Swiper class */
-
-
-/*=============== CONTACT ===============*/
+/*=============== CONTATO ===============*/
 .contact__container {
   row-gap: 3.5rem;
 }
@@ -795,7 +791,7 @@ body.dark-theme {
 }
 
 
-/* Status color */
+/* Status cor */
 .color-red {
   color: hsl(4, 71%, 50%);
 }
@@ -804,7 +800,7 @@ body.dark-theme {
   color: hsl(207, 56%, 45%);
 }
 
-/*=============== FOOTER ===============*/
+/*=============== RODAPÉ ===============*/
 
 .footer__container {
   padding: 3rem 0 7rem;
@@ -857,7 +853,7 @@ body.dark-theme {
   color: var(--text-color-light);
 }
 
-/*=============== SCROLL BAR ===============*/
+/*=============== SCROLL BARRA ===============*/
 
 ::-webkit-scrollbar {
   width: .6rem;
@@ -894,12 +890,12 @@ body.dark-theme {
   transform: translateY(-.25rem);
 }
 
-/* Show Scroll Up*/
+/* Mostrar Scroll Up*/
 .show-scroll {
   bottom: 7.5rem;
 }
 
-/*=============== BREAKPOINTS ===============*/
+/*=============== RESPONSIVIDADE ===============*/
 /* For small devices */
 @media screen and (max-width: 340px) {
   .container {
