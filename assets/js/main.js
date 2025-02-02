@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
 /*=============== EMAIL JS ===============*/
 const contactForm = document.getElementById('contact__form'),
     contactName = document.getElementById('contact-name'),
