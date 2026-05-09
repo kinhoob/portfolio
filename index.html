@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light" data-lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marco Davi — Desenvolvedor Frontend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#f4f2ed;--bg2:#eceae3;--bg3:#e3e0d7;
+  --surface:#fff;--surface2:rgba(255,255,255,.75);
+  --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.04);
+  --text:#0d0c0a;--text2:#575249;--text3:#9a938b;
+  --accent:#b8965a;--accent-light:#d4a96e;--accent-glow:rgba(184,150,90,.22);
+  --nav-bg:rgba(244,242,237,.9);
+  --card-bg:#fff;--card-border:rgba(0,0,0,.055);
+  --tag-bg:rgba(184,150,90,.1);--tag-text:#8a6e3a;
+  --input-bg:#f9f7f3;
+  --shadow:0 4px 32px rgba(0,0,0,.07);--shadow-lg:0 24px 80px rgba(0,0,0,.11);
+  --tt:background-color .55s cubic-bezier(.4,0,.2,1),color .55s cubic-bezier(.4,0,.2,1),border-color .55s cubic-bezier(.4,0,.2,1),box-shadow .55s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"]{
+  --bg:#0b0a08;--bg2:#111009;--bg3:#19170f;
+  --surface:#1c1a14;--surface2:rgba(28,26,20,.85);
+  --border:rgba(255,255,255,.065);--border2:rgba(255,255,255,.03);
+  --text:#ede9df;--text2:#9b9488;--text3:#575049;
+  --accent:#c9a468;--accent-light:#e0bc84;--accent-glow:rgba(201,164,104,.18);
+  --nav-bg:rgba(11,10,8,.93);
+  --card-bg:#1a1810;--card-border:rgba(255,255,255,.045);
+  --tag-bg:rgba(201,164,104,.09);--tag-text:#c9a468;
+  --input-bg:#161410;
+  --shadow:0 4px 32px rgba(0,0,0,.45);--shadow-lg:0 24px 80px rgba(0,0,0,.65);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);transition:var(--tt);overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:none;border:none;background:none;font-family:inherit}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* CURSOR */
+#c-glow{position:fixed;top:0;left:0;z-index:9997;pointer-events:none;width:360px;height:360px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,var(--accent-glow) 0%,transparent 68%);opacity:0;transition:opacity .4s;will-change:transform}
+#c-dot{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;width:6px;height:6px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+#c-ring{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--accent);transform:translate(-50%,-50%);opacity:.4;transition:width .3s,height .3s,opacity .3s,background .3s}
+body.c-hover #c-dot{width:10px;height:10px}
+body.c-hover #c-ring{width:52px;height:52px;opacity:.2;background:var(--accent-glow)}
+
+/* TYPOGRAPHY */
+h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.1}
+.display{font-size:clamp(3rem,6.5vw,6.5rem);font-weight:800;letter-spacing:-.035em}
+.h1{font-size:clamp(2rem,4vw,3.6rem);font-weight:700;letter-spacing:-.02em}
+.section-label{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.7rem}
+.section-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+
+/* LAYOUT */
+.container{max-width:1160px;margin:0 auto;padding:0 32px}
+section{padding:120px 0}
+.section-header{display:flex;flex-direction:column;gap:14px;margin-bottom:60px}
+
+/* SCROLL TOP */
+#scroll-top{position:fixed;bottom:30px;right:30px;z-index:800;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px var(--accent-glow);opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s,box-shadow .3s;pointer-events:none}
+#scroll-top.vis{opacity:1;transform:translateY(0);pointer-events:auto}
+#scroll-top:hover{box-shadow:0 12px 40px var(--accent-glow);transform:translateY(-3px)}
+#scroll-top svg{width:18px;height:18px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;background:var(--nav-bg);backdrop-filter:blur(24px) saturate(1.5);-webkit-backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid var(--border);transition:var(--tt),transform .35s}
+nav.hidden{transform:translateY(-100%)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px;max-width:1160px;margin:0 auto;padding:0 32px}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.08rem;letter-spacing:-.025em;color:var(--text);transition:color .3s}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.05em;color:var(--text2);position:relative;transition:color .3s}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent);transition:width .35s cubic-bezier(.4,0,.2,1)}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-controls{display:flex;align-items:center;gap:6px}
+.lang-btn{font-size:.68rem;font-weight:700;letter-spacing:.12em;padding:5px 11px;border-radius:20px;color:var(--text3);border:1px solid var(--border);transition:color .3s,border-color .3s,background .3s}
+.lang-btn.active{color:var(--accent);border-color:var(--accent);background:var(--tag-bg)}
+.theme-btn{width:38px;height:22px;border-radius:11px;background:var(--bg3);border:1px solid var(--border);position:relative;transition:background .5s,border-color .5s;display:flex;align-items:center;padding:3px}
+.theme-btn-knob{width:16px;height:16px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent-glow);transition:transform .45s cubic-bezier(.4,0,.2,1)}
+[data-theme="dark"] .theme-btn-knob{transform:translateX(16px)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;padding:8px}
+.nav-hamburger span{width:20px;height:1.5px;background:var(--text);transition:.3s;display:block}
+
+/* HERO */
+#home{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:62px}
+#particles-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-grain{position:absolute;inset:0;z-index:1;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+.hero-left{display:flex;flex-direction:column;gap:28px}
+
+/* eyebrow */
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--tag-bg);border:1px solid rgba(184,150,90,.22);padding:8px 16px;border-radius:20px;width:fit-content;animation:fUp .8s .05s cubic-bezier(.16,1,.3,1) both}
+.eyebrow-dot{position:relative;width:8px;height:8px;flex-shrink:0}
+.eyebrow-dot::before{content:'';position:absolute;inset:0;border-radius:50%;background:#22c55e;animation:ping 1.8s ease-in-out infinite}
+.eyebrow-dot::after{content:'';position:absolute;inset:1.5px;border-radius:50%;background:#22c55e}
+@keyframes ping{0%,100%{transform:scale(1);opacity:1}60%{transform:scale(2.2);opacity:0}}
+
+/* title */
+.hero-title{display:flex;flex-direction:column}
+.hero-title .lw{overflow:hidden}
+.hero-title .ln{display:block;animation:sUp .95s cubic-bezier(.16,1,.3,1) both}
+.hero-title .ln:nth-child(1){animation-delay:.15s}
+.hero-title .ln:nth-child(2){animation-delay:.25s}
+.hero-title .ln:nth-child(3){animation-delay:.35s}
+@keyframes sUp{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+.hero-title .accent{color:var(--accent)}
+
+.hero-subtitle{font-size:1rem;color:var(--text2);line-height:1.78;max-width:460px;animation:fUp 1s .52s cubic-bezier(.16,1,.3,1) both}
+@keyframes fUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;animation:fUp 1s .65s cubic-bezier(.16,1,.3,1) both}
+.btn-primary{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:50px;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.05em;transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s;position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);transform:translateX(-100%);transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px var(--accent-glow)}
+.btn-secondary{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:50px;border:1.5px solid var(--border);color:var(--text);font-family:'Syne',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.05em;transition:border-color .3s,background .3s,transform .3s;background:var(--surface)}
+.btn-secondary:hover{border-color:var(--accent);background:var(--tag-bg);transform:translateY(-2px)}
+
+.hero-stats{display:flex;gap:36px;animation:fUp 1s .78s cubic-bezier(.16,1,.3,1) both}
+.hero-stat-num{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--text);line-height:1}
+.hero-stat-label{font-size:.74rem;color:var(--text3);margin-top:4px}
+
+/* photo */
+.hero-right{position:relative;display:flex;justify-content:center;align-items:center;animation:fUp 1.1s .4s cubic-bezier(.16,1,.3,1) both}
+.hero-photo-wrap{position:relative;width:370px;height:450px}
+.hero-photo-bg{position:absolute;inset:18px 0 0 18px;border-radius:22px;background:var(--accent);opacity:.12;animation:floatA 7s ease-in-out infinite}
+@keyframes floatA{0%,100%{transform:translate(0,0)}50%{transform:translate(-7px,11px)}}
+.hero-photo-frame{position:absolute;inset:0 18px 18px 0;border-radius:22px;overflow:hidden;border:1px solid var(--border);background:var(--bg2);display:flex;align-items:flex-end;justify-content:center}
+.hero-photo-frame img{width:84%;object-fit:contain}
+[data-theme="dark"] .hero-photo-frame img{filter:brightness(.9)}
+
+.hero-badge{position:absolute;bottom:-12px;left:-20px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:12px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;animation:floatB 5.5s ease-in-out infinite}
+@keyframes floatB{0%,100%{transform:translate(0,0)}50%{transform:translate(4px,-10px)}}
+.hero-badge-icon{width:38px;height:38px;border-radius:10px;background:var(--tag-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero-badge-icon svg{width:18px;height:18px;stroke:var(--accent);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hero-badge-text{font-size:.77rem;font-weight:700;color:var(--text)}
+.hero-badge-sub{font-size:.66rem;color:var(--text3);margin-top:2px}
+
+.hero-location{position:absolute;top:20px;right:-14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 14px;box-shadow:var(--shadow);font-size:.72rem;font-weight:600;display:flex;align-items:center;gap:6px;animation:floatC 6s ease-in-out infinite;color:var(--text2)}
+@keyframes floatC{0%,100%{transform:translate(0,0)}50%{transform:translate(-5px,8px)}}
+.hero-location svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+.hero-exp-badge{position:absolute;top:50%;right:-24px;transform:translateY(-50%);background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 16px;text-align:center;box-shadow:var(--shadow);animation:floatA 8s 1s ease-in-out infinite}
+.hero-exp-badge-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--accent);line-height:1}
+.hero-exp-badge-text{font-size:.64rem;color:var(--text3);margin-top:3px;white-space:nowrap;line-height:1.4}
+
+/* ABOUT */
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:start}
+.about-cards{display:flex;flex-direction:column;gap:14px}
+.about-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:18px;padding:26px;box-shadow:var(--shadow);transition:var(--tt),transform .3s;position:relative;overflow:hidden}
+.about-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.about-card:hover::before{opacity:1}
+.about-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.about-card-icon{width:40px;height:40px;border-radius:10px;background:var(--tag-bg);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.about-card-icon svg{width:18px;height:18px;stroke:var(--accent);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.about-card-title{font-size:.92rem;font-weight:700;margin-bottom:6px}
+.about-card-text{font-size:.83rem;color:var(--text2);line-height:1.65}
+.about-content{display:flex;flex-direction:column;gap:28px}
+.about-text{font-size:.97rem;color:var(--text2);line-height:1.82}
+.about-details{display:flex;flex-direction:column;gap:12px}
+.about-detail-row{display:flex;align-items:flex-start;gap:14px;font-size:.85rem}
+.about-detail-row .label{color:var(--text3);min-width:96px;padding-top:1px}
+.about-detail-row .value{color:var(--text);font-weight:500;flex:1}
+
+/* timeline */
+.timeline{display:flex;flex-direction:column}
+.timeline-item{display:flex;gap:18px;padding-bottom:26px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.timeline-dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--accent);background:var(--bg2);flex-shrink:0;margin-top:3px}
+.timeline-vline{width:1px;flex:1;background:var(--border);margin-top:3px}
+.timeline-item:last-child .timeline-vline{display:none}
+.timeline-body{flex:1}
+.timeline-period{font-size:.66rem;font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:3px;text-transform:uppercase}
+.timeline-role{font-family:'Syne',sans-serif;font-weight:700;font-size:.91rem}
+.timeline-company{font-size:.78rem;color:var(--text3);margin-top:1px}
+.timeline-bullets{margin-top:8px;display:flex;flex-direction:column;gap:3px}
+.timeline-bullets li{font-size:.77rem;color:var(--text2);line-height:1.55;padding-left:14px;position:relative;list-style:none}
+.timeline-bullets li::before{content:'—';position:absolute;left:0;color:var(--accent);font-size:.7rem}
+
+/* SKILLS */
+#skills{background:var(--bg)}
+.skills-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:44px;flex-wrap:wrap}
+.skills-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.skills-tab{padding:7px 18px;border-radius:20px;font-size:.78rem;font-weight:700;letter-spacing:.05em;border:1px solid var(--border);color:var(--text2);transition:all .3s}
+.skills-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.skills-tab:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+.skill-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:18px;padding:26px 18px;text-align:center;transition:var(--tt),transform .3s,box-shadow .3s}
+.skill-card:hover{transform:translateY(-5px);box-shadow:0 18px 56px var(--accent-glow);border-color:var(--accent)}
+.skill-card-icon{width:48px;height:48px;margin:0 auto 14px;border-radius:14px;background:var(--tag-bg);display:flex;align-items:center;justify-content:center}
+.skill-card-icon svg{width:22px;height:22px;stroke:var(--accent);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.skill-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.86rem}
+.skill-level{font-size:.68rem;color:var(--text3);margin-top:3px;letter-spacing:.05em}
+.skill-bar-wrap{height:2.5px;background:var(--border);border-radius:2px;margin-top:12px;overflow:hidden}
+.skill-bar{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-light));transform:scaleX(0);transform-origin:left;transition:transform 1.1s cubic-bezier(.4,0,.2,1)}
+
+/* PROJECTS */
+#projects{background:var(--bg2)}
+.projects-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+.project-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:22px;overflow:hidden;transition:var(--tt),transform .45s cubic-bezier(.4,0,.2,1),box-shadow .45s}
+.project-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg)}
+.project-card:nth-child(1){grid-column:span 7}
+.project-card:nth-child(2){grid-column:span 5}
+.project-card:nth-child(3){grid-column:span 5}
+.project-card:nth-child(4){grid-column:span 7}
+.project-visual{height:210px;overflow:hidden;position:relative}
+.project-visual-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.project-card:hover .project-visual-inner{transform:scale(1.06)}
+.project-visual-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(0,0,0,.55));opacity:0;transition:opacity .45s}
+.project-card:hover .project-visual-overlay{opacity:1}
+.pv-menu{background:linear-gradient(135deg,#0a1628 0%,#1a2f5c 50%,#0d4f3c 100%)}
+.pv-air{background:linear-gradient(135deg,#0d0d0d 0%,#1a1a1a 40%,#2c2c2c 100%)}
+.pv-rollie{background:linear-gradient(135deg,#1a0a2e 0%,#2d1b69 50%,#11998e 100%)}
+.pv-gh{background:var(--bg3)}
+.mock-screen{width:80%;max-width:230px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:7px}
+.mock-bar{height:5px;border-radius:3px;background:rgba(255,255,255,.14)}
+.mock-bar.ac{background:var(--accent)}
+.mock-bar.w85{width:85%}.mock-bar.w70{width:70%}.mock-bar.w55{width:55%}.mock-bar.w40{width:40%}.mock-bar.w60{width:60%}.mock-bar.w50{width:50%}
+.mock-dots{display:flex;gap:5px;margin-bottom:3px}
+.mock-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2)}
+.mock-dot.r{background:#ff5f57}.mock-dot.g{background:#28c840}.mock-dot.y{background:#febc2e}
+.project-body{padding:26px}
+.project-type{font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
+.project-title{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:9px}
+.project-desc{font-size:.83rem;color:var(--text2);line-height:1.72;margin-bottom:18px}
+.project-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
+.project-tag{font-size:.66rem;font-weight:700;letter-spacing:.07em;padding:3px 11px;border-radius:20px;background:var(--tag-bg);color:var(--tag-text)}
+.project-links{display:flex;gap:10px}
+.project-link{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;font-weight:700;letter-spacing:.05em;padding:7px 15px;border-radius:20px;transition:all .3s}
+.project-link.primary{background:var(--accent);color:#fff}
+.project-link.primary:hover{box-shadow:0 6px 22px var(--accent-glow);transform:translateY(-1px)}
+.project-link.ghost{border:1px solid var(--border);color:var(--text2)}
+.project-link.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* CONTACT */
+#contact{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:34px}
+.contact-channels{display:flex;flex-direction:column;gap:12px}
+.contact-channel{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;transition:var(--tt),border-color .3s,transform .3s}
+.contact-channel:hover{border-color:var(--accent);transform:translateX(4px)}
+.contact-channel-icon{width:40px;height:40px;border-radius:10px;background:var(--tag-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-channel-icon svg{width:17px;height:17px;stroke:var(--accent);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.contact-channel-label{font-size:.64rem;color:var(--text3);letter-spacing:.08em;text-transform:uppercase}
+.contact-channel-value{font-size:.84rem;font-weight:600;color:var(--text);margin-top:1px}
+.social-links{display:flex;gap:10px}
+.social-link{width:42px;height:42px;border-radius:11px;border:1px solid var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.social-link svg{width:17px;height:17px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.social-link:hover{border-color:var(--accent);color:var(--accent);background:var(--tag-bg);transform:translateY(-3px)}
+.contact-form{background:var(--surface2);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:24px;padding:36px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:18px}
+.form-group{display:flex;flex-direction:column;gap:7px}
+.form-label{font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--text2);text-transform:uppercase}
+.form-input,.form-textarea{background:var(--input-bg);border:1px solid var(--border);border-radius:12px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--text);transition:border-color .3s,box-shadow .3s,var(--tt);outline:none;resize:none}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text3)}
+.form-input:focus,.form-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.form-textarea{min-height:110px}
+.form-submit{display:flex;align-items:center;justify-content:center;gap:9px;padding:15px 30px;border-radius:50px;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.05em;width:100%;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.form-submit::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);transform:translateX(-100%);transition:transform .45s}
+.form-submit:hover::before{transform:translateX(0)}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 36px var(--accent-glow)}
+
+/* FOOTER */
+footer{background:var(--bg3);border-top:1px solid var(--border);padding:44px 0;transition:var(--tt)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.025em}
+.footer-logo span{color:var(--accent)}
+.footer-text{font-size:.78rem;color:var(--text3)}
+.footer-links{display:flex;gap:22px}
+.footer-links a{font-size:.78rem;color:var(--text3);transition:color .3s}
+.footer-links a:hover{color:var(--accent)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+/* LANG TRANSITION — applies on body during swap */
+body.lang-out .lang-el{opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease}
+.lang-el{transition:opacity .22s ease,transform .22s ease}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero-right{display:none}
+  .hero-ctas{justify-content:center}
+  .hero-stats{justify-content:center}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card:nth-child(n){grid-column:span 1}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  nav.mob-open .nav-links{display:flex;flex-direction:column;position:absolute;top:62px;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:22px 32px;gap:22px}
+  section{padding:80px 0}
+  .skills-top{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:600px){
+  .container{padding:0 20px}
+  .hero-stats{gap:20px}
+  .contact-form{padding:24px 20px}
+  #scroll-top{bottom:18px;right:18px}
+}
+</style>
+</head>
+<body>
+
+<div id="c-glow"></div>
+<div id="c-dot"></div>
+<div id="c-ring"></div>
+
+<button id="scroll-top" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">Marco<span>.</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home" class="nav-link lang-el" data-key="nav_home" data-active="home">Início</a></li>
+      <li><a href="#about" class="nav-link lang-el" data-key="nav_about" data-active="about">Sobre</a></li>
+      <li><a href="#skills" class="nav-link lang-el" data-key="nav_skills" data-active="skills">Habilidades</a></li>
+      <li><a href="#projects" class="nav-link lang-el" data-key="nav_projects" data-active="projects">Projetos</a></li>
+      <li><a href="#contact" class="nav-link lang-el" data-key="nav_contact" data-active="contact">Contato</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="lang-btn active" data-lang-switch="pt">PT</button>
+      <button class="lang-btn" data-lang-switch="en">EN</button>
+      <button class="theme-btn" id="theme-btn" aria-label="Alternar tema"><div class="theme-btn-knob"></div></button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-grain"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span class="lang-el" data-key="hero_available">Disponível para freelance</span>
+        </div>
+        <div class="hero-title display">
+          <div class="lw"><span class="ln lang-el" data-key="hero_line1">Olá, sou</span></div>
+          <div class="lw"><span class="ln accent">Marco Davi</span></div>
+          <div class="lw"><span class="ln lang-el" data-key="hero_line3">Dev Frontend</span></div>
+        </div>
+        <p class="hero-subtitle lang-el" data-key="hero_subtitle">Transformando ideias em experiências digitais poderosas. Apaixonado por interfaces limpas, código eficiente e soluções que fazem a diferença real.</p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn-primary">
+            <span class="lang-el" data-key="hero_cta1">Ver Projetos</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#contact" class="btn-secondary"><span class="lang-el" data-key="hero_cta2">Entre em Contato</span></a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="hero-stat-num">3+</div><div class="hero-stat-label lang-el" data-key="stat_exp">Anos de Exp.</div></div>
+          <div><div class="hero-stat-num">23+</div><div class="hero-stat-label lang-el" data-key="stat_proj">Projetos</div></div>
+          <div><div class="hero-stat-num">2+</div><div class="hero-stat-label lang-el" data-key="stat_comp">Empresas</div></div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-bg"></div>
+          <div class="hero-photo-frame">
+            <img src="https://kinhoob.github.io/portfolio/assets/img/perfil-removebg.png" alt="Marco Davi" />
+          </div>
+          <div class="hero-badge">
+            <div class="hero-badge-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <div class="hero-badge-text lang-el" data-key="badge_text">Dev Frontend</div>
+              <div class="hero-badge-sub">Olinda, PE</div>
+            </div>
+          </div>
+          <div class="hero-location">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="lang-el" data-key="location">Olinda, Pernambuco</span>
+          </div>
+          <div class="hero-exp-badge">
+            <div class="hero-exp-badge-num">3+</div>
+            <div class="hero-exp-badge-text lang-el" data-key="exp_badge">Anos de Experiência</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label lang-el" data-key="about_label">Sobre mim</div>
+      <div class="h1 lang-el" data-key="about_title">Transformando desafios em soluções digitais</div>
+    </div>
+    <div class="about-grid">
+      <div class="about-cards">
+        <div class="about-card reveal reveal-d1">
+          <div class="about-card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div class="about-card-title lang-el" data-key="acard1_title">Resolutivo</div>
+          <div class="about-card-text lang-el" data-key="acard1_text">Experiência prática em suporte técnico e resolução de problemas em ambiente corporativo real, reduzindo interrupções nos sistemas internos.</div>
+        </div>
+        <div class="about-card reveal reveal-d2">
+          <div class="about-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div class="about-card-title lang-el" data-key="acard2_title">Foco em UI/UX</div>
+          <div class="about-card-text lang-el" data-key="acard2_text">Interfaces responsivas com atenção à usabilidade e experiência do usuário. Boas práticas de organização e estruturação de código.</div>
+        </div>
+        <div class="about-card reveal reveal-d3">
+          <div class="about-card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="about-card-title lang-el" data-key="acard3_title">Evolução Contínua</div>
+          <div class="about-card-text lang-el" data-key="acard3_text">Buscando constantemente crescer como desenvolvedor, contribuindo com soluções eficientes e aprendendo novas tecnologias.</div>
+        </div>
+      </div>
+      <div class="about-content reveal reveal-d2">
+        <div>
+          <div class="section-label lang-el" data-key="about_bio_label" style="margin-bottom:14px">Resumo</div>
+          <p class="about-text lang-el" data-key="about_bio">Desenvolvedor Frontend com experiência prática em projetos reais e atuação como Assistente de TI, prestando suporte técnico e manutenção de sistemas. Possuo conhecimento em HTML, CSS, JavaScript, React e PHP, com foco na criação de interfaces responsivas e funcionais. Tenho experiência na resolução de problemas em ambiente corporativo e busco oportunidade para evoluir como desenvolvedor e contribuir com soluções eficientes.</p>
+        </div>
+        <div class="about-details">
+          <div class="about-detail-row"><span class="label lang-el" data-key="detail_name">Nome</span><span class="value">Marco Davi</span></div>
+          <div class="about-detail-row"><span class="label">Email</span><span class="value">marcodavibdemelo@gmail.com</span></div>
+          <div class="about-detail-row"><span class="label lang-el" data-key="detail_location">Localização</span><span class="value lang-el" data-key="location">Olinda, Pernambuco</span></div>
+          <div class="about-detail-row"><span class="label lang-el" data-key="detail_lang">Idiomas</span><span class="value lang-el" data-key="detail_lang_val">Português (Nativo), Inglês (B2)</span></div>
+          <div class="about-detail-row"><span class="label lang-el" data-key="detail_services">Serviços</span><span class="value lang-el" data-key="detail_services_val">Web Design, Documentação de Software</span></div>
+        </div>
+        <div>
+          <div class="section-label lang-el" data-key="timeline_label" style="margin-bottom:20px">Experiência & Formação</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-vline"></div></div>
+              <div class="timeline-body">
+                <div class="timeline-period lang-el" data-key="exp1_period">2024 — Atual</div>
+                <div class="timeline-role lang-el" data-key="exp1_role">Assistente de TI</div>
+                <div class="timeline-company">M.M. de Oliveira Minimercado Ltda · Olinda, PE</div>
+                <ul class="timeline-bullets">
+                  <li class="lang-el" data-key="exp1_b1">Suporte técnico a usuários (hardware e software)</li>
+                  <li class="lang-el" data-key="exp1_b2">Manutenção de computadores, redes e sistemas internos</li>
+                  <li class="lang-el" data-key="exp1_b3">Identificação e redução de interrupções nos sistemas</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-vline"></div></div>
+              <div class="timeline-body">
+                <div class="timeline-period lang-el" data-key="exp2_period">2022 — Atual</div>
+                <div class="timeline-role lang-el" data-key="exp2_role">Desenvolvedor Frontend Freelancer</div>
+                <div class="timeline-company lang-el" data-key="exp2_company">Remoto</div>
+                <ul class="timeline-bullets">
+                  <li class="lang-el" data-key="exp2_b1">Interfaces responsivas com HTML, CSS e JavaScript</li>
+                  <li class="lang-el" data-key="exp2_b2">Projetos web com foco em usabilidade e experiência do usuário</li>
+                  <li class="lang-el" data-key="exp2_b3">Boas práticas de organização e estruturação de código</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-vline"></div></div>
+              <div class="timeline-body">
+                <div class="timeline-period">Abr. 2022 — Dez. 2023</div>
+                <div class="timeline-role lang-el" data-key="exp3_role">Estagiário — Dev Frontend & Backend</div>
+                <div class="timeline-company">Secretaria da Fazenda de Olinda · PE</div>
+                <ul class="timeline-bullets">
+                  <li class="lang-el" data-key="exp3_b1">Desenvolvimento com HTML, CSS, PHP e JavaScript</li>
+                  <li class="lang-el" data-key="exp3_b2">Atuação em demandas reais, contribuindo para melhorias em sistemas internos</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-vline"></div></div>
+              <div class="timeline-body">
+                <div class="timeline-period">Fev. 2021 — Dez. 2023</div>
+                <div class="timeline-role lang-el" data-key="edu1_degree">Análise e Desenvolvimento de Sistemas</div>
+                <div class="timeline-company">UNIBRA — Centro Universitário Brasileiro · PE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label lang-el" data-key="skills_label">Habilidades</div>
+      <div class="skills-top">
+        <div class="h1 lang-el" data-key="skills_title">Tecnologias que domino</div>
+        <div class="skills-tabs">
+          <button class="skills-tab active" data-tab="all">Todas</button>
+          <button class="skills-tab" data-tab="frontend">Frontend</button>
+          <button class="skills-tab" data-tab="backend">Backend</button>
+          <button class="skills-tab" data-tab="tools">Ferramentas</button>
+        </div>
+      </div>
+    </div>
+    <div class="skills-grid" id="skills-grid">
+      <div class="skill-card reveal" data-tab="frontend">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <div class="skill-name">HTML</div><div class="skill-level lang-el" data-key="level_int">Intermediário</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".72"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d1" data-tab="frontend">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+        <div class="skill-name">CSS</div><div class="skill-level lang-el" data-key="level_int">Intermediário</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".70"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d2" data-tab="frontend">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div class="skill-name">JavaScript</div><div class="skill-level lang-el" data-key="level_bas">Básico</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".45"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d3" data-tab="frontend">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="skill-name">React</div><div class="skill-level lang-el" data-key="level_bas">Básico</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".40"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d1" data-tab="frontend">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+        <div class="skill-name">Sass</div><div class="skill-level lang-el" data-key="level_bas">Básico</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".40"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d2" data-tab="backend">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+        <div class="skill-name">PHP</div><div class="skill-level lang-el" data-key="level_int">Intermediário</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".62"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d3" data-tab="backend">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="skill-name">SQL</div><div class="skill-level lang-el" data-key="level_bas">Básico</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".42"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d1" data-tab="tools">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></div>
+        <div class="skill-name">Git</div><div class="skill-level lang-el" data-key="level_int">Intermediário</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".70"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d2" data-tab="tools">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+        <div class="skill-name">GitHub</div><div class="skill-level lang-el" data-key="level_int">Intermediário</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".70"></div></div>
+      </div>
+      <div class="skill-card reveal reveal-d3" data-tab="tools">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
+        <div class="skill-name">Responsividade</div><div class="skill-level lang-el" data-key="level_int">Intermediário</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-w=".72"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label lang-el" data-key="projects_label">Projetos</div>
+      <div class="h1 lang-el" data-key="projects_title">Trabalhos recentes</div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-visual pv-menu">
+          <div class="project-visual-inner">
+            <img src="assets/img/projeto-menu-online.json" alt="Menu Online" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="project-visual-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">WEB APP</div>
+          <div class="project-title">Menu Online</div>
+          <p class="project-desc lang-el" data-key="proj1_desc">Cardápio digital responsivo para restaurantes locais, com foco em usabilidade mobile e acessibilidade. Interface clara e funcional para navegação e pedidos.</p>
+          <div class="project-tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span></div>
+          <div class="project-links">
+            <a href="https://menu-online-pj9tsf80b-kinhoob.vercel.app/" target="_blank" class="project-link primary"><span class="lang-el" data-key="proj_live">Ver Projeto</span> ↗</a>
+            <a href="https://github.com/kinhoob/menu-online" target="_blank" class="project-link ghost">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal reveal-d1">
+        <div class="project-visual pv-air">
+          <div class="project-visual-inner">
+            <img src="assets/img/projeto-airpods.png" alt="Airpods Landing Page" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="project-visual-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">LANDING PAGE</div>
+          <div class="project-title">Airpods</div>
+          <p class="project-desc lang-el" data-key="proj2_desc">Landing page premium inspirada no design da Apple. Animações suaves e estética refinada para apresentar o produto com impacto visual.</p>
+          <div class="project-tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span></div>
+          <div class="project-links">
+            <a href="https://airpods-mu.vercel.app/" target="_blank" class="project-link primary"><span class="lang-el" data-key="proj_live">Ver Projeto</span> ↗</a>
+            <a href="https://github.com/kinhoob/airpods" target="_blank" class="project-link ghost">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal reveal-d2">
+        <div class="project-visual pv-rollie">
+          <div class="project-visual-inner">
+            <img src="assets/img/projeto-rollie.json" alt="Rollie" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="project-visual-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">WEB APP</div>
+          <div class="project-title">Rollie</div>
+          <p class="project-desc lang-el" data-key="proj3_desc">Projeto focado no aprimoramento em HTML, CSS, Sass e JavaScript. Boas práticas de desenvolvimento front-end aplicadas em um app moderno.</p>
+          <div class="project-tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">Sass</span><span class="project-tag">JavaScript</span></div>
+          <div class="project-links">
+            <a href="https://rollie-five.vercel.app/" target="_blank" class="project-link primary"><span class="lang-el" data-key="proj_live">Ver Projeto</span> ↗</a>
+            <a href="https://github.com/kinhoob/rollie" target="_blank" class="project-link ghost">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal reveal-d3 pv-gh" style="display:flex;align-items:center;justify-content:center;min-height:280px">
+        <div style="text-align:center;padding:36px 28px">
+          <div style="width:56px;height:56px;border-radius:16px;background:var(--tag-bg);margin:0 auto 18px;display:flex;align-items:center;justify-content:center">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:9px" class="lang-el" data-key="github_cta_title">Mais no GitHub</div>
+          <p style="font-size:.82rem;color:var(--text2);margin-bottom:22px;line-height:1.65" class="lang-el" data-key="github_cta_text">Explore todos os meus projetos open source e experimentos no GitHub.</p>
+          <a href="https://github.com/kinhoob" target="_blank" class="btn-primary" style="display:inline-flex">
+            <span class="lang-el" data-key="github_cta_btn">Ver GitHub</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;align-items:center">
+      <div class="section-label lang-el" data-key="contact_label">Contato</div>
+      <div class="h1 lang-el" data-key="contact_title">Vamos construir algo juntos</div>
+      <p style="font-size:.98rem;color:var(--text2);max-width:460px;line-height:1.75" class="lang-el" data-key="contact_intro">Tem um projeto em mente? Quer colaborar ou apenas trocar uma ideia? Adoraria ouvir você.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-channels">
+          <a href="mailto:marcodavibdemelo@gmail.com" class="contact-channel">
+            <div class="contact-channel-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="contact-channel-label">EMAIL</div><div class="contact-channel-value">marcodavibdemelo@gmail.com</div></div>
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=5581983656583" target="_blank" class="contact-channel">
+            <div class="contact-channel-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <div><div class="contact-channel-label">WHATSAPP</div><div class="contact-channel-value">+55 (81) 98365-6583</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/marco-davi-55a6842a0/" target="_blank" class="contact-channel">
+            <div class="contact-channel-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <div><div class="contact-channel-label">LINKEDIN</div><div class="contact-channel-value">marco-davi-55a6842a0</div></div>
+          </a>
+        </div>
+        <div>
+          <div class="section-label lang-el" data-key="social_label" style="margin-bottom:14px">Redes Sociais</div>
+          <div class="social-links">
+            <a href="https://github.com/kinhoob/" target="_blank" class="social-link" title="GitHub"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+            <a href="https://www.linkedin.com/in/marco-davi-55a6842a0/" target="_blank" class="social-link" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="assets/pdfs/Curriculum 1 - Marco Davi.pdf" target="_blank" class="social-link" title="Currículo"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-d2">
+        <div class="form-group">
+          <label class="form-label lang-el" data-key="form_name">Nome</label>
+          <input type="text" class="form-input" id="form-name" placeholder="Marco Davi">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="form-email" placeholder="seu@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label lang-el" data-key="form_project">Projeto / Mensagem</label>
+          <textarea class="form-textarea" id="form-message" placeholder="Conta sobre o seu projeto..."></textarea>
+        </div>
+        <button class="form-submit" id="form-submit">
+          <span class="lang-el" data-key="form_send">Enviar Mensagem</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">Marco<span>.</span></div>
+      <div class="footer-text lang-el" data-key="footer_copy">© 2026 Marco Davi. Todos os direitos reservados.</div>
+      <div class="footer-links">
+        <a href="#home" class="lang-el" data-key="nav_home">Início</a>
+        <a href="#projects" class="lang-el" data-key="nav_projects">Projetos</a>
+        <a href="#contact" class="lang-el" data-key="nav_contact">Contato</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================  TRANSLATIONS  */
+const T={
+  pt:{
+    nav_home:'Início',nav_about:'Sobre',nav_skills:'Habilidades',nav_projects:'Projetos',nav_contact:'Contato',
+    hero_available:'Disponível para freelance',hero_line1:'Olá, sou',hero_line3:'Dev Frontend',
+    hero_subtitle:'Transformando ideias em experiências digitais poderosas. Apaixonado por interfaces limpas, código eficiente e soluções que fazem a diferença real.',
+    hero_cta1:'Ver Projetos',hero_cta2:'Entre em Contato',
+    stat_exp:'Anos de Exp.',stat_proj:'Projetos',stat_comp:'Empresas',
+    badge_text:'Dev Frontend',location:'Olinda, Pernambuco',exp_badge:'Anos de Experiência',
+    about_label:'Sobre mim',about_title:'Transformando desafios em soluções digitais',
+    acard1_title:'Resolutivo',acard1_text:'Experiência prática em suporte técnico e resolução de problemas em ambiente corporativo real, reduzindo interrupções nos sistemas internos.',
+    acard2_title:'Foco em UI/UX',acard2_text:'Interfaces responsivas com atenção à usabilidade e experiência do usuário. Boas práticas de organização e estruturação de código.',
+    acard3_title:'Evolução Contínua',acard3_text:'Buscando constantemente crescer como desenvolvedor, contribuindo com soluções eficientes e aprendendo novas tecnologias.',
+    about_bio_label:'Resumo',
+    about_bio:'Desenvolvedor Frontend com experiência prática em projetos reais e atuação como Assistente de TI, prestando suporte técnico e manutenção de sistemas. Possuo conhecimento em HTML, CSS, JavaScript, React e PHP, com foco na criação de interfaces responsivas e funcionais. Tenho experiência na resolução de problemas em ambiente corporativo e busco oportunidade para evoluir como desenvolvedor e contribuir com soluções eficientes.',
+    detail_name:'Nome',detail_location:'Localização',detail_lang:'Idiomas',detail_lang_val:'Português (Nativo), Inglês (B2)',
+    detail_services:'Serviços',detail_services_val:'Web Design, Documentação de Software',
+    timeline_label:'Experiência & Formação',
+    exp1_period:'2024 — Atual',exp1_role:'Assistente de TI',
+    exp1_b1:'Suporte técnico a usuários (hardware e software)',exp1_b2:'Manutenção de computadores, redes e sistemas internos',exp1_b3:'Identificação e redução de interrupções nos sistemas',
+    exp2_period:'2022 — Atual',exp2_role:'Desenvolvedor Frontend Freelancer',exp2_company:'Remoto',
+    exp2_b1:'Interfaces responsivas com HTML, CSS e JavaScript',exp2_b2:'Projetos web com foco em usabilidade e experiência do usuário',exp2_b3:'Boas práticas de organização e estruturação de código',
+    exp3_role:'Estagiário — Dev Frontend & Backend',
+    exp3_b1:'Desenvolvimento com HTML, CSS, PHP e JavaScript',exp3_b2:'Atuação em demandas reais, contribuindo para melhorias em sistemas internos',
+    edu1_degree:'Análise e Desenvolvimento de Sistemas',
+    skills_label:'Habilidades',skills_title:'Tecnologias que domino',
+    level_int:'Intermediário',level_bas:'Básico',
+    projects_label:'Projetos',projects_title:'Trabalhos recentes',
+    proj1_desc:'Cardápio digital responsivo para restaurantes locais, com foco em usabilidade mobile e acessibilidade. Interface clara e funcional para navegação e pedidos.',
+    proj2_desc:'Landing page premium inspirada no design da Apple. Animações suaves e estética refinada para apresentar o produto com impacto visual.',
+    proj3_desc:'Projeto focado no aprimoramento em HTML, CSS, Sass e JavaScript. Boas práticas de desenvolvimento front-end aplicadas em um app moderno.',
+    proj_live:'Ver Projeto',
+    github_cta_title:'Mais no GitHub',github_cta_text:'Explore todos os meus projetos open source e experimentos no GitHub.',github_cta_btn:'Ver GitHub',
+    contact_label:'Contato',contact_title:'Vamos construir algo juntos',
+    contact_intro:'Tem um projeto em mente? Quer colaborar ou apenas trocar uma ideia? Adoraria ouvir você.',
+    social_label:'Redes Sociais',
+    form_name:'Nome',form_project:'Projeto / Mensagem',form_send:'Enviar Mensagem',
+    footer_copy:'© 2026 Marco Davi. Todos os direitos reservados.'
+  },
+  en:{
+    nav_home:'Home',nav_about:'About',nav_skills:'Skills',nav_projects:'Projects',nav_contact:'Contact',
+    hero_available:'Available for freelance',hero_line1:"Hello, I'm",hero_line3:'Frontend Dev',
+    hero_subtitle:'Transforming ideas into powerful digital experiences. Passionate about clean interfaces, efficient code, and solutions that make a real difference.',
+    hero_cta1:'View Projects',hero_cta2:'Contact Me',
+    stat_exp:'Years Exp.',stat_proj:'Projects',stat_comp:'Companies',
+    badge_text:'Frontend Dev',location:'Olinda, Pernambuco',exp_badge:'Years of Experience',
+    about_label:'About me',about_title:'Transforming challenges into digital solutions',
+    acard1_title:'Problem Solver',acard1_text:'Hands-on experience in technical support and real-world problem solving in corporate environments, reducing system downtime.',
+    acard2_title:'UI/UX Focused',acard2_text:'Responsive interfaces with attention to usability and user experience. Good practices in code organization and structure.',
+    acard3_title:'Continuous Growth',acard3_text:'Constantly seeking to grow as a developer, contributing efficient solutions and learning new technologies.',
+    about_bio_label:'Summary',
+    about_bio:"Frontend Developer with hands-on experience in real projects and as an IT Assistant, providing technical support and system maintenance. Knowledge in HTML, CSS, JavaScript, React and PHP, focused on building responsive, functional interfaces. Experienced in corporate problem-solving, looking to grow as a developer and contribute efficient solutions.",
+    detail_name:'Name',detail_location:'Location',detail_lang:'Languages',detail_lang_val:'Portuguese (Native), English (B2)',
+    detail_services:'Services',detail_services_val:'Web Design, Software Documentation',
+    timeline_label:'Experience & Education',
+    exp1_period:'2024 — Present',exp1_role:'IT Assistant',
+    exp1_b1:'Technical support to users (hardware and software)',exp1_b2:'Maintenance of computers, networks and internal systems',exp1_b3:'Identification and reduction of system interruptions',
+    exp2_period:'2022 — Present',exp2_role:'Freelance Frontend Developer',exp2_company:'Remote',
+    exp2_b1:'Responsive interfaces with HTML, CSS and JavaScript',exp2_b2:'Web projects focused on usability and user experience',exp2_b3:'Good practices in code organization and structure',
+    exp3_role:'Intern — Frontend & Backend Dev',
+    exp3_b1:'Development with HTML, CSS, PHP and JavaScript',exp3_b2:'Real demands at Sefaz de Olinda, contributing to internal system improvements',
+    edu1_degree:'Systems Analysis & Development',
+    skills_label:'Skills',skills_title:'Technologies I work with',
+    level_int:'Intermediate',level_bas:'Basic',
+    projects_label:'Projects',projects_title:'Recent work',
+    proj1_desc:'Responsive digital menu for local restaurants, focused on mobile usability and accessibility. Clear, functional interface for browsing and ordering.',
+    proj2_desc:"Premium landing page inspired by Apple's design language. Smooth animations and refined aesthetics to present the product with visual impact.",
+    proj3_desc:'Project focused on improving HTML, CSS, Sass and JavaScript skills. Frontend development best practices applied in a modern app.',
+    proj_live:'Live Demo',
+    github_cta_title:'More on GitHub',github_cta_text:'Explore all my open source projects and personal experiments on GitHub.',github_cta_btn:'View GitHub',
+    contact_label:'Contact',contact_title:"Let's build something together",
+    contact_intro:"Have a project in mind? Want to collaborate or just say hello? I'd love to hear from you.",
+    social_label:'Social',
+    form_name:'Name',form_project:'Project / Message',form_send:'Send Message',
+    footer_copy:'© 2026 Marco Davi. All rights reserved.'
+  }
+};
+
+/* =========================================================  INIT  */
+let lang=localStorage.getItem('md-lang')||'pt';
+let theme=localStorage.getItem('md-theme')||'light';
+
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  theme=t;localStorage.setItem('md-theme',t);
+}
+function renderText(l){
+  const t=T[l];
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const v=t[el.dataset.key];
+    if(v!==undefined)el.textContent=v;
+  });
+}
+function applyLang(l,animate){
+  if(animate){
+    document.body.classList.add('lang-out');
+    setTimeout(()=>{
+      renderText(l);
+      document.body.classList.remove('lang-out');
+    },220);
+  } else { renderText(l); }
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.langSwitch===l));
+  document.documentElement.lang=l==='pt'?'pt-BR':'en';
+  lang=l;localStorage.setItem('md-lang',l);
+}
+
+applyTheme(theme);
+applyLang(lang,false);
+
+document.getElementById('theme-btn').addEventListener('click',()=>applyTheme(theme==='light'?'dark':'light'));
+document.querySelectorAll('[data-lang-switch]').forEach(b=>{
+  b.addEventListener('click',()=>{if(b.dataset.langSwitch!==lang)applyLang(b.dataset.langSwitch,true)});
+});
+document.getElementById('hamburger').addEventListener('click',()=>{
+  document.getElementById('navbar').classList.toggle('mob-open');
+});
+
+/* =========================================================  CURSOR  */
+const glow=document.getElementById('c-glow');
+const dot=document.getElementById('c-dot');
+const ring=document.getElementById('c-ring');
+let mx=0,my=0,rx=0,ry=0;
+
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  dot.style.left=mx+'px';dot.style.top=my+'px';
+  glow.style.left=mx+'px';glow.style.top=my+'px';
+  glow.style.opacity='1';
+});
+document.addEventListener('mouseleave',()=>glow.style.opacity='0');
+
+(function animRing(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+
+document.querySelectorAll('a,button,.skill-card,.project-card,.about-card,.contact-channel').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('c-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('c-hover'));
+});
+
+/* =========================================================  PARTICLES  */
+const cv=document.getElementById('particles-canvas');
+const cx=cv.getContext('2d');
+let W,H,pts=[];
+function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight}
+resize();window.addEventListener('resize',resize);
+const mkPt=()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.3+.3,o:Math.random()*.28+.07});
+for(let i=0;i<65;i++)pts.push(mkPt());
+(function drawP(){
+  cx.clearRect(0,0,W,H);
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  const c=dark?'201,164,104':'140,110,58';
+  pts.forEach((p,i)=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    cx.fillStyle=`rgba(${c},${p.o})`;cx.fill();
+    for(let j=i+1;j<pts.length;j++){
+      const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);
+      if(d<100){cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.strokeStyle=`rgba(${c},${(1-d/100)*.08})`;cx.lineWidth=.5;cx.stroke()}
+    }
+  });
+  requestAnimationFrame(drawP);
+})();
+
+/* =========================================================  NAV + SCROLL  */
+let lastY=0;
+const nb=document.getElementById('navbar');
+const st=document.getElementById('scroll-top');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY;
+  nb.classList.toggle('hidden',s>lastY&&s>150);
+  st.classList.toggle('vis',s>500);
+  lastY=s;
+  document.querySelectorAll('section[id]').forEach(sec=>{
+    const top=sec.offsetTop-130,bot=top+sec.offsetHeight;
+    if(s>=top&&s<bot)document.querySelectorAll('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.active===sec.id));
+  });
+});
+
+/* =========================================================  REVEAL + SKILL BARS  */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('revealed');
+      const bar=e.target.querySelector('.skill-bar');
+      if(bar)setTimeout(()=>{bar.style.transform=`scaleX(${bar.dataset.w||.5})`},240);
+      ro.unobserve(e.target);
+    }
+  });
+},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* =========================================================  SKILLS TABS  */
+document.querySelectorAll('.skills-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.skills-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const sel=tab.dataset.tab;
+    let idx=0;
+    document.querySelectorAll('.skill-card').forEach(card=>{
+      const show=sel==='all'||card.dataset.tab===sel;
+      if(show){
+        card.style.display='block';
+        card.style.opacity='0';card.style.transform='translateY(12px)';
+        const i=idx++;
+        setTimeout(()=>{card.style.transition='opacity .38s ease,transform .38s ease';card.style.opacity='1';card.style.transform='translateY(0)'},i*38);
+      } else { card.style.display='none'; }
+    });
+  });
+});
+
+/* =========================================================  MAGNETIC BTNS  */
+document.querySelectorAll('.btn-primary,.btn-secondary').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.12}px) translateY(-2px)`;
+  });
+  btn.addEventListener('mouseleave',()=>btn.style.transform='');
+});
+
+/* =========================================================  FORM  */
+document.getElementById('form-submit').addEventListener('click',()=>{
+  const name=document.getElementById('form-name').value.trim();
+  const email=document.getElementById('form-email').value.trim();
+  const msg=document.getElementById('form-message').value.trim();
+  if(name&&email&&msg)window.location.href=`mailto:marcodavibdemelo@gmail.com?subject=Contato Portfolio - ${name}&body=${encodeURIComponent(msg+'\n\nDe: '+name+'\nEmail: '+email)}`;
+});
+</script>
+</body>
+</html>
